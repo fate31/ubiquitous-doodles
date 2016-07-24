@@ -1,0 +1,11 @@
+APT "";
+APT::Install-Recommends "true";
+aptitude "";
+aptitude::Ignore-Recommends-Important "true";
+aptitude::Keep-Unused-Pattern "";
+aptitude::Delete-Unused-Pattern "";
+aptitude::UI "";
+aptitude::UI::InfoAreaTabs "true";
+aptitude::UI::Advance-On-Action "true";
+aptitude::Auto-Upgrade "true";
+aptitude::AutoClean-After-Update "true";

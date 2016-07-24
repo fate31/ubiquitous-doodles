@@ -1,0 +1,611 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="content-language" content="en"/>
+	<meta name="description" content="Major League Baseball"/>
+	<meta name="language" content="en"/>
+<style>
+
+
+#promoWhiteBgDiv{
+	position: absolute;
+	top:-5px;
+	left:49px;
+	height: 90px;
+	width: 551px;
+}
+#promotionContainer {
+	font-family: Helvetica, Arial, sans-serif;
+	font-size:12px;
+	position: absolute;
+	top: 31px;
+	left: 58px;
+	height: 53px;
+	width: 538px;
+}
+#prmoContents{
+	position: absolute;
+	width : 583px;
+	height: 55px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	left: 4px;
+	top: 30px;
+}
+
+#prmoTableHeader{
+	position: absolute;
+	top: -30px;
+	width: 598px;
+	height: 40px;
+	left: -4px
+}
+
+/*#promoWhiteBg {
+	left: 5px;
+	top: -90px;
+	width:160px;
+	height:600px;
+}*/
+
+#closeBtn{
+	position: absolute;
+	top: -30px;
+	left: -1px;
+}
+
+
+@font-face {
+  font-family: Helvetica, Arial, sans-serif;
+  
+}
+
+#ticketingContainer   {
+	font-family: Helvetica, Arial, sans-serif;
+	font-size:11px;
+	font-weight: bold;
+  	color:#333333;
+	position: relative;
+    left:18px;
+	top: -97px; 
+	
+}
+
+#ticketingContainer contentDiv {
+	padding-left:-35px;
+}
+
+.contentDiv {
+	border-left:1px dotted #ccc;
+	padding-left:7px;
+	margin-top:13px;
+	height:76px;
+	width:85px;
+}
+
+
+
+.contentDiv p {
+	margin:0;
+}
+
+
+p.contents {line-height:170%;}
+
+#whiteBg{
+	position: absolute;
+	top: 5px;
+	left: 189px;
+	height: 85px;
+}
+
+#dateColumn {
+font-family: Arial, Helvetica, sans-serif;
+  font-size: 6pt;
+  font-color:#333333;
+  width:100%;
+}
+
+
+#timeColumn {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 9.5pt;
+  font-color:#333333;
+}
+
+.bx-window{
+	width:400px;
+	
+}
+.bx-wrapper{
+	width:400px;
+	
+}
+.bx-prev, .bx-next {
+	position:absolute;
+	top: 4px;
+	height:60px;
+}
+.bx-prev {
+	left: -10px;
+        top: 14px;
+		
+}
+
+.bx-prev img {
+		border:0;
+}
+
+.bx-next img {
+		border:0;
+}
+.bx-next {
+	left: 410px;
+        top: 14px;
+		
+}
+
+#textLink {
+	font-family:Arial;
+	font-size: 11px;
+	color: #003399;
+}
+
+
+
+a {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #003399;
+}
+a {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #003399;
+}
+a:link {
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: none;
+}
+a:active {
+	text-decoration: none;
+}
+
+.next1 {	position:absolute;
+	top:223px;
+}
+.prev1 {	position:absolute;
+	top:26px;
+}
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+}
+</style>
+
+<script type="text/javascript" src="/shared/scripts/external/jquery.js"></script>
+<script type="text/javascript" src="/shared/scripts/external/jquery-template/jquery.template.min.js"></script>
+<script type="text/javascript" src="/shared/scripts/external/jquery.bxSlider.min.js"></script>
+
+<script>
+
+
+
+var o;
+var game;
+
+var promotionArray=[];
+var promotionTicketIndex;
+
+
+
+var club = getParameterByName('c_id');
+var yearParam = getParameterByName('year');
+var partnerId= getParameterByName('partnerId');
+var tagURL= getParameterByName('tagURL');
+var omPageName=getParameterByName('omPageName');
+
+
+function getParameterByName(name)
+{
+  name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+  var regexS = "[\\?&]" + name + "=([^&#]*)";
+  var regex = new RegExp(regexS);
+  var results = regex.exec(window.location.search);
+  if(results == null)
+    return "";
+  else
+    return decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+if(tagURL){
+	
+}else{
+	tagURL="";
+}
+
+var clubProps = {
+	"ana": "108"
+	,
+	"ari": "109"
+	,
+	"atl": "144"
+	,
+	"bal": "110"
+	,
+	"bos": "111"
+	,
+	"chc": "112"
+	,
+	"cin": "113"
+	,
+	"cle": "114"
+	,
+	"col": "115"
+	,
+	"cws": "145"
+	,
+	"det": "116"
+	,
+	"hou": "117"
+	,
+	"kc": "118"
+	,
+	"la": "119"
+	,
+	"mia": "146"
+	,
+	"mil": "158"
+	,
+	"min": "142"
+	,
+	"nym": "121"
+	,
+	"nyy": "147"
+	,
+	"oak": "133"
+	,
+	"phi": "143"
+	,
+	"pit": "134"
+	,
+	"sd": "135"
+	,
+	"sea": "136"
+	,
+	"sf": "137"
+	,
+	"stl": "138"
+	,
+	"tb": "139"
+	,
+	"tex": "140"
+	,
+	"tor": "141"
+	,
+	"was": "120"
+	};
+
+var tlinks=[];
+var teamID=clubProps[club];
+
+//var bgImageURL = "http://qa.mlb.com/flash/ads/ticketingBanners/300x250/300x250_"+club+"_2015-spring-dynamic.jpg";
+
+</script>
+
+</head>
+<body leftmargin="0" topmargin="0">
+
+
+<div id="bgImage">
+<img id="bgImg" style="cursor:pointer;" onclick=bgImageClick(); width="728" height="90" />
+<div id="whiteBg">
+  <img src="/flash/ads/ticketingBanners/728x90/whitebg.png" />
+  <div  id="ticketingContainer" >
+    
+    
+  </div>
+
+
+
+</div>
+</div>
+
+ <div  id="promoWhiteBgDiv">
+  <img src="../300x250/image/promoWhiteBg.jpg" width="604" height="94"  id="promoWhiteBg" />
+  </div>
+  <div  id="promotionContainer"  >
+  
+    <table width="290" border="0" cellspacing="0" id="prmoTableHeader" name="prmoTableHeader">
+      <tr>
+        <td height="10" style="background-color:#D2ECDF; padding:0px; font-size:11px; text-indent:20px; "><b>   Offers and Promotions                 </b>  </td>
+      </tr>
+      <tr>
+        <td height="5" valign="top" id="promoheaderText" style="background-color:#D2ECDF; font-size:12px; padding:2px;"></td>
+      </tr>
+      <tr>
+        <td > <div id="prmoContents"></div> </td>
+      </tr>
+</table>
+
+ 
+	</img>
+    <span  id="closeBtn" style="cursor:pointer;" onclick="closePromotionWindow()" > <b>X</b> </span>
+
+
+  
+  
+</div>
+</div>
+
+<script>
+
+
+document.getElementById('promotionContainer').style.display = 'none';
+document.getElementById('promoWhiteBgDiv').style.display = 'none';
+
+var bgImage = "/ticketing/ads/dynamicads/728x90/assets/728x90-dyn-schedule-"+club.toUpperCase()+".jpg?v=3";
+
+var x = document.getElementById("bgImg");
+x.setAttribute("src", bgImage);
+
+var date= new Date();
+
+
+var dt = new Date(); 
+var toYMD =function (dt) { 
+    var year, month, day; 
+    year = String(dt.getFullYear()); 
+    month = String(dt.getMonth() + 1); 
+    if (month.length == 1) { 
+        month = "0" + month; 
+    } 
+    day = String(dt.getDate()); 
+    if (day.length == 1) { 
+        day = "0" + day; 
+    } 
+    return year + month + day; 
+} 
+var beginDate = toYMD(dt); 
+yearParam = yearParam || String(dt.getFullYear());
+
+
+var ticketingContainer = (function(window, document, $, undefined, bam) {
+	var _makeAjaxRequest = function(){
+		$.ajax({
+			url:"/ticketing-client/json/GameTicketPromotion.tiksrv?team_id="+teamID+"&home_team_id="+teamID+"&site_section=DEFAULT&ticket_category=TICKETS&display_in=Promotions&leave_empty_games=false&offer_group=dynamicads&year="+yearParam+"&game_type=R&begin_date="+beginDate+"&events=7",
+			//url: "GameTicketPromotion.json",
+			dataType : "json",
+			success: function(json){
+				//console.log(json);
+				var tpl = "ticketing728x90.tpl?v=13",
+					html = $.template(tpl,json,true);
+					$(html).appendTo("#ticketingContainer");
+					
+					  $('#slider1').bxSlider({
+					displaySlideQty:4,
+					moveSlideQty: 1,
+					prevImage:"/flash/ads/ticketingBanners/728x90/previousBtn.png",
+					nextImage: "/flash/ads/ticketingBanners/728x90/nextBtn.png"
+
+		
+				  });
+			}
+		});
+		
+	}
+	return {
+		init: function(){
+			_makeAjaxRequest();
+		}
+	}
+	
+	
+})(this, this.document, this.jQuery, undefined, this.bam);
+
+
+$(function(){
+	ticketingContainer.init();
+	
+	
+	 
+	
+})
+
+var bgImageClick = function()
+{
+		window.open(tagURL+"http://mlb.mlb.com/ticketing/singlegame.jsp?c_id="+club+"&y=2015&partnerId="+partnerId, '_blank');
+
+	
+}
+
+    var openTicketLink= function(tlink)
+	{
+		
+	var str = 	tlinks[tlink];	
+		
+		var url = "";
+			if(str.indexOf("?")==-1)
+			{
+				if(partnerId)
+				{
+					url = 	tagURL+str+"?partnerId="+partnerId;
+				}else{
+					url = 	tagURL+str;
+				}
+			}else{
+				if(partnerId)
+				{
+					url = 	tagURL+str+"&partnerId="+partnerId;
+				}else{
+					url = 	tagURL+str;
+				}
+			}
+			window.open(url, '_blank');
+	}
+	
+	
+var openPrmotionLink= function(promotion)
+	{
+		
+		promotionTicketIndex = promotion;
+		document.getElementById('promotionContainer').style.display = 'block';
+		 document.getElementById('promoWhiteBgDiv').style.display = 'block';
+		var prmotionElement = 	document.getElementById("prmoContents");
+		var promotionObject = promotionArray[promotion];
+		var offerName;
+		if(promotionArray[promotion].offer_name)
+		{
+			offerName = 	promotionArray[promotion].offer_name;
+		}else{
+			offerName ="";
+		}
+		prmotionElement.innerHTML = "";
+		prmotionElement.innerHTML += "<b>"+offerName+"</b></br><img   style='cursor:pointer;' onclick=openTicketLink(promotionTicketIndex); src='assets/icon_ticket.gif'/> <span  style='cursor:pointer;'  class='textLinks' id='textLink'  onclick=openTicketLink(promotionTicketIndex);> Tickets</span></a><br\>"+promotionArray[promotion].description;
+		
+		var promoElement = document.getElementById('promotionContainer');
+		promoElement.style.width=300;
+		promoElement.style.height=250;
+		
+		
+	
+		prmotionElement.style.width=300;
+		prmotionElement.style.height=200;
+		
+	
+		if(promotionObject.length){
+				prmotionElement.innerHTML = "";
+			for(var i=0; i<promotionObject.length; i++)
+			{
+				if(promotionObject[i].offer_name)
+				{
+					prmotionElement.innerHTML += "<b>" +promotionObject[i].offer_name+"<br\><img   style='cursor:pointer;' onclick=openTicketLink(promotionTicketIndex); src='assets/icon_ticket.gif'/> <span  style='cursor:pointer;'  class='textLinks' id='textLink'  onclick=openTicketLink(promotionTicketIndex);> Tickets</span></a></b><br\>"+promotionObject[i].description;
+				}else{
+					prmotionElement.innerHTML += "<br\>";	
+				}
+				if(promotionObject[i].description){
+					prmotionElement.innerHTML += promotionObject[i].description+"<br\>";
+				}
+				if(promotionObject[i].thumbnail)
+				{
+					prmotionElement.innerHTML +="<img  src="+ promotionObject[i].thumbnail+"><br\>";
+				}
+				if(promotionObject[i].distribution)
+				{
+					prmotionElement.innerHTML += promotionObject[i].distribution+"<br\>";
+				}
+				if(promotionObject[i].presented_by)
+				{
+					prmotionElement.innerHTML += "Presented by "+promotionObject[i].presented_by+"<br\>";
+				}
+			}
+		}else{
+				if(promotionArray[promotion].offer_name)
+				{
+				prmotionElement.innerHTML  ="<b>" +promotionArray[promotion].offer_name+"</b><br\><img   style='cursor:pointer;' onclick=openTicketLink(promotionTicketIndex); src='assets/icon_ticket.gif'/> <span  style='cursor:pointer;'  class='textLinks' id='textLink'  onclick=openTicketLink(promotionTicketIndex);> Tickets</span></a><br\><br\>"+ promotionArray[promotion].description;
+				}
+			if(promotionArray[promotion].description)
+			{
+				
+				prmotionElement.innerHTML +=	promotionArray[promotion].description;
+				
+			}else{
+				//prmotionElement.innerHTML = " ";
+			}
+			if(promotionArray[promotion].thumbnail)
+			{
+				prmotionElement.innerHTML +="<img  src="+ promotionArray[promotion].thumbnail+"><br\>";
+			}
+			if(promotionArray[promotion].distribution)
+			{
+				prmotionElement.innerHTML += promotionArray[promotion].distribution+"<br\>";
+			}
+			if(promotionArray[promotion].presented_by)
+			{
+				prmotionElement.innerHTML += "Presented by "+promotionArray[promotion].presented_by+"<br\>";
+			}
+		}
+
+		var date= new Date(o[promotion].game_time_local_str.substring(0,4),Number(o[promotion].game_time_local_str.substring(5,7)-1),o[promotion].game_time_local_str.substring(8,10));
+		
+		
+		
+		var promoheaderTextElement = 	document.getElementById("promoheaderText");
+        promoheaderTextElement.innerHTML = "<b>"+date.toDateString().substring(0,3) +
+            ", "+ 
+            date.toDateString().substring(4,8) +
+            " "+ 
+            Number(date.toDateString().substring(8,10))+
+            " - "+
+            formatTime( o[promotion] ) + " vs. "+  o[promotion].away_name_full +"</b>" ;
+		 
+
+	}
+	
+	var closePromotionWindow = function(){
+		
+		 var state =document.getElementById('promotionContainer').style.display;
+            if (state == 'block') {
+               document.getElementById('promotionContainer').style.display = 'none';
+			   	 document.getElementById('promoWhiteBgDiv').style.display = 'none';
+            } else {
+               document.getElementById('promotionContainer').style.display = 'block';
+			   	 document.getElementById('promoWhiteBgDiv').style.display = 'block';
+            }
+       
+	
+		
+	}
+
+
+    var formatTime = function( game ) {
+        var formattedTime = [ getTime(game.game_time_local_str.substring(11,13)),
+            ":", 
+            game.game_time_local_str.substring(14,16),
+            checkAmPm(game.game_time_local_str.substring(11,13))
+        ];
+        formattedTime = formattedTime.join("");
+        return /3\:33/.test( formattedTime ) ? "TBD" : formattedTime;
+    }
+	
+	
+	
+	var getTime =function(time)
+		{
+			if(time>12){
+				time=time-12;
+			}
+			return time;
+		}
+        
+        var checkAmPm = function(time)
+        {
+        if(time<12){
+				return "AM";
+			}else
+			{
+				return "PM";
+			}
+        }
+   
+</script>
+</body>
+</html>
+ı˘êRê      Wï3ŒWï3œ<µ1uWï6&  Ñ    :https://secure.mlb.com/ticketing/ads/dynamicads/728x90/ticketingBannerExternal728x90.html?c_id=oak&tagURL=https%3A%2F%2Fadclick.g.doubleclick.net%2Fpcs%2Fclick%3Fxai%3DAKAOjsuQ-7vzLbm4DlTwkBpDAm6uypDwKzMyJEcLFXHED8kdfUePMBT9bnaiToJorCa01WlKTSj97y46PNGq-_toTBOOvL3UY8AfZVDLQrL6s28bRAel-4LmIT__FqkbskehgRWZLICxjA%26sig%3DCg0ArKJSzIes-YTA687cEAE%26urlfix%3D1%26adurl%3Dhttps%3A%2F%2Fadclick.g.doubleclick.net%2Faclk%253Fsa%253Dl%2526ai%253DCy0odzDOVV7HGGtaRigP486WYBq_A8ZRGjuH7lq8BwI23ARABIABgyfb4hsijoBmCARdjYS1wdWItNzQ0MzcwNDE5NDIyOTY5NKAB0JTA8wPIAQngAgCoAwGqBIsCT9ClWR7Cv_m10kgVmaCt9zQcuLNdkhyrN4dltO0dN4RrKksegMPwVwO59W_4SnFKG8Rc_w_lg7TSyLrudx0KyUfzmx3pJ74VKvdEz4Y2q8oRhBTVl8srzwcHm4AZc974uq0e_gRKK9baiS_a4bFdqeCUAu-YfRCiD3Cu9QhIyzM8biIKbvrnIvGjXYfKYTZFu_ejkTC2CegB-PIorsG6MaD6BCk1Sg_P4Pkzx4VFzZEjoF2yNXb9oqfjzfTDX0voNFW-hZ7BcwrOPr8cdH6aP1mdNLE5T5Jn4APKiq1FYZItG61c-yPe6HqbQl2ZPedgWcvPmvGfZmVo8liJxl1PpX4MnG6E0ObmK2_L4AQBgAaJ_vLhh4SKjEWgBiGoB6a-G9gHAA%2526num%253D1%2526sig%253DAOD64_0gknZHmsGOkP9LMbpx0H56VcZUDg%2526client%253Dca-pub-7443704194229694%2526adurl%253Dhttp%3A%2F%2Fexch.quantserve.com%2Fr%253Fa%253Dp-2N7CcEcxRK5bU%2526labels%253D_qc.clk%2C_click.adserver.rtb%2C_click.rand.94509%2526rtbip%253D64.7.204.7%2526rtbdata2%253DEAAaIU1MQl9PYWtsYW5kQXRobGV0aWNzX1NHVFZDUE1fMjAxNiCxlxko8pIMMLzQMzojaHR0cDovL2FudGl2aXJ1cy5lY29tbWVyY2V0aW1lcy5jb21aKGRpVVZqWEFnSDQ5dUtoM2NkQ3NCM25RaUZObHVKa25jSUNidFZ5ZTR1W3O9P4AB-5q4xQKgAfytA6gB4J_tAroBHUNBRVNFSlc5ODkwUzNBNXlla0Q3ZDlWQlVMbzoxwAGm1CnIAe2tyfbhKtoBFlY1VXp6QUFHb3pFS1lvaldZd2w1LUHlATNRLTvoATKYAsOLDagCBqgCBagCB7ACCLoCBEAHzAfAAgLIAgDQAqPqocSMvt_ztAHgAgA%2526redirecturl2%253D&partnerId=DFA-1684121-69657376-129947974 necko:classified 1 security-info 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 request-method GET response-head HTTP/1.1 200 OK
+Server: Oracle-iPlanet-Web-Server/7.0
+Date: Sun, 24 Jul 2016 21:31:58 GMT
+Cache-Control: max-age=600
+Edge-control: max-age=600
+Content-Type: text/html
+Last-Modified: Thu, 28 Apr 2016 22:35:08 GMT
+Content-Length: 13527
+Etag: "34d7-5722901c"
+Accept-Ranges: bytes
+ charset windows-1252 uncompressed-len 0 predictor::resource-count 10 predictor::https://secure.mlb.com/shared/scripts/external/jquery.js 1,1,1469395918,0 predictor::https://secure.mlb.com/shared/scripts/external/jquery-template/jquery.template.min.js 1,1,1469395918,0 predictor::https://secure.mlb.com/shared/scripts/external/jquery.bxSlider.min.js 1,1,1469395918,0 predictor::https://secure.mlb.com/flash/ads/ticketingBanners/728x90/whitebg.png 1,1,1469395918,0 predictor::https://secure.mlb.com/ticketing/ads/dynamicads/300x250/image/promoWhiteBg.jpg 1,1,1469395918,0 predictor::https://secure.mlb.com/ticketing/ads/dynamicads/728x90/assets/728x90-dyn-schedule-OAK.jpg?v=3 1,1,1469395918,0 predictor::https://secure.mlb.com/ticketing/ads/springtraining/728x90/assets/icon_ticket.gif 1,1,1469395918,0 predictor::https://secure.mlb.com/ticketing/ads/dynamicads/300x250/asset/promotion.jpg 1,1,1469395918,0 predictor::https://secure.mlb.com/flash/ads/ticketingBanners/728x90/nextBtn.png 1,1,1469395918,0 predictor::https://secure.mlb.com/flash/ads/ticketingBanners/728x90/previousBtn.png 1,1,1469395918,0   4◊
